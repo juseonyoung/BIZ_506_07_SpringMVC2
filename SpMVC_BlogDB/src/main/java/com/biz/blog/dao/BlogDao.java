@@ -12,6 +12,7 @@ public interface BlogDao {
 	public List<BlogVO> selectAll();
 	public BlogVO findBySeq(long seq);
 	
+	
 	// 제목으로 검색하기
 	// PK칼럼이 아닌 나머지 칼럼을 대상으로 조회를 하면 설령 데이터가 1개밖에 나오지 않더라도
 	// 이 결과값은 반드시 리스트형이다. 

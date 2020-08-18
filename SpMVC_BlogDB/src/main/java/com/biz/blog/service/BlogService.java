@@ -2,6 +2,7 @@ package com.biz.blog.service;
 
 import java.util.List;
 
+import com.biz.blog.dao.BlogDao;
 import com.biz.blog.model.BlogVO;
 
 public interface BlogService {
@@ -10,6 +11,8 @@ public interface BlogService {
 	// PK칼럼으로 대상으로 조회를 하면 데이터는 절대 2개이상 나오지 않는다. 
 	// 반드시 1개만 나온다  따라서 return type이 절대 list형이 아니다 .
 	public List<BlogVO> selectAll();
+	//public BlogVO findBySeq(long seq);
+	
 	public BlogVO findBySeq(long seq);
 	
 	// 제목으로 검색하기
@@ -23,4 +26,5 @@ public interface BlogService {
 	public int insert(BlogVO blogVO);
 	public int update(BlogVO blogVO);
 	public int delete(long seq);
+	
 }

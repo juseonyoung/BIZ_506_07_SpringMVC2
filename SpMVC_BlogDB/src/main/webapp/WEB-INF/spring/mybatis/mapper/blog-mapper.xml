@@ -17,8 +17,48 @@
  		
  		
  	<select id="findById"></select>
- 	<insert id="insert"></insert>
- 	<update id="update"></update>
- 	<delete id="delete"></delete>
+ 	
+ 	<!-- resultType: 어떤 타입으로 데이터를 return 할 것인가  -->
+ 	<select id="findBySeq" resultType="BlogVO">
+ 		select * from tbl_blogs
+ 		where bl_seq = #{seq}
+ 		
+ 		</select>
+ 	
+ 	<!-- 파라미터타입 : 어떤 타입으로 데이터를 주입할 것인가  -->
+ 	<insert id="insert" parameterType="BlogVO">
+ 		insert into tbl_blogs(
+ 		BL_SEQ,
+		BL_USER,
+		BL_DATE,
+		BL_TIME,
+		BL_TITLE,
+		BL_CONTENTS
+	) values (
+		seq_blog.NEXTVAL,
+		#{bl_user},
+		#{bl_date},
+		#{bl_time},
+		#{bl_title},
+		#{bl_contents}
+)
+ 		
+ 		
+ 	 		
+ 	</insert>
+ 	<update id="update" parameterType ="BlogVO">
+ 		update tbl_blog SET
+ 			bl_user = #{bl_user},
+ 			bl_date = #{bl_date},
+ 			bl_time = #{bl_time},
+ 			bl_title = #{bl_title},
+ 			bl_contents = #{bl_contents}
+ 		where bl_seq = #{bl_seq}	
+ 			
+ 			
+ 			</update>
+ 	<delete id="delete">
+ 		delete from tbl_blogs where bl_seq = #{seq}
+ 		</delete>
  
  </mapper> 

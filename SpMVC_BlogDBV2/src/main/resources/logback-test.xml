@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="3 seconds">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+
+<!-- 
+	level 순서 : 순위를 설정하면 하위순위의 METHOD는 무시된다. 
+		FATAL : LOG.FATAL()
+		ERROR : LOG.ERROR()
+		WARN : LOG.WARN()
+		INFO : LOG.INFO()
+		DEBUG : LOG.DEBUG()
+		TRACE :: LOG.TRACE()
+
+ -->
+    <logger name="org.springframework" level="WARN" /> <!-- 스프링프레임워크 마이바티스 INFO 단계에서 개발해라  -->
+    <logger name="org.mybatis"><level value="INFO"/></logger>
+    <logger name="com.biz.blog"><level value="DEBUG"/></logger> <!-- 개발할 때는 상태를 DEBUG로 놓고 콘솔에 보여줘서
+    편하게 하고 개발 끝나면 INFO로 바꿔서 사용자들은 자세한 내용을 못 보게 한다  -->
+      <root level="WARN">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
+
+
