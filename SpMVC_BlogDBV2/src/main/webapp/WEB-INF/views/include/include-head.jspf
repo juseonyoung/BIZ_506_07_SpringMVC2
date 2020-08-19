@@ -47,6 +47,6 @@
 
 */
 %>
-<link rel="stylesheet" type="text/css" href="${rootPath}/static/css/main.css?ver=2020-068-12"/>
+<link rel="stylesheet" type="text/css" href="${rootPath}/static/css/main.css?ver=202342"/>
 
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>

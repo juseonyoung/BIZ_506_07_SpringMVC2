@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>    
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
  <footer>
-     <address>CopyRight &copy; sinsin0902@daum.net</address>
+     <address>CopyRight &copy; ssyy0622@gmail.com</address>
 </footer>
