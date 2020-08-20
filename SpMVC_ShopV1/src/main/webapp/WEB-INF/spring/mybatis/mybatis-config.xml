@@ -8,6 +8,6 @@
 	<typeAliases>
 		<typeAlias 
 			type="com.biz.shop.model.ProductVO" 
-			alias="BBsDTO"/>
+			alias="ProVO"/> <!-- resulttype이랑 같아야됨   -->
 	</typeAliases>
 	</configuration>

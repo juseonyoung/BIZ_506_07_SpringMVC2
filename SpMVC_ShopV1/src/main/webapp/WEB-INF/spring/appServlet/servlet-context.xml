@@ -13,7 +13,8 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/static/**" location="/static/" />
+	<resources mapping="/static/**" location="/static/" /> <!-- static안에 있는 무언가를 요청하면?? 로케이션에서 static있나 찾아보고
+	그냥 만들어서 넣어놓으면 됨..굳이 컨트롤러로 보내지말고 dispatch야 HTTP GET방식으로 누가 요청하면 그냥 줘버려라 -->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -21,7 +22,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	 <context:component-scan base-package="com.biz.shop.controller" />
+	 <context:component-scan base-package="com.biz.shop.controller" /> <!-- annotation 붙어있으면 bean으로 전부 만들어라 -->
+	  <context:component-scan base-package="com.biz.shop.service" />
 	
 	
 	
