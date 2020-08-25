@@ -82,7 +82,12 @@ article a {
 			const p_code1 = $(this).data("pcode") //리스트에 상품정보 안보일 때는 이 방법 써라 
 			//alert(p_code1)
 			
-			document.location.href="${rootPath}/product/detail?p_code="+p_code
+			// 문자열 탬플릿트
+			// Es6(ESCMA 2015)버전에서는 백틱`을 사용하여 변수명과 문자열을 합성할 수 있다.
+			// 하지만 JSP에서는 EL 태그와 문법충돌로 인하여 사용이 불가능 하다 
+			document.location.href=
+				"${rootPath}/product/detail?id="+p_code //p_code보다는 id나 시퀀스 쓰는 것이 더 좋음 
+						// ?id=P00001 형식으로 주소창에 뜸
 		})
 	})
 

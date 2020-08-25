@@ -4,10 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
+
+<!-- mapper.xml의 insert, update  명령문의 각 칼럼에 jdbcType= VARCHAR 등과 같은 코드를 자동으로 생성하라  -->
+	<settings>
+		<setting name ="jdbcTypeForNull" value="NULL"></setting>
+	</settings>
 	
 	<typeAliases>
 		<typeAlias 
 			type="com.biz.shop.model.ProductVO" 
 			alias="ProVO"/> <!-- resulttype이랑 같아야됨   -->
+			
+			<typeAlias 
+			type="com.biz.shop.model.DeptVO" 
+			alias="DeptVO"/> 
 	</typeAliases>
 	</configuration>
