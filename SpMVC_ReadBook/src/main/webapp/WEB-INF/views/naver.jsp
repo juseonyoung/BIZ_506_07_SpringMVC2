@@ -16,7 +16,7 @@ body {
 
 nav#search-nav {
 	width: 100%;
-	background-color: blue;
+	background-color: orange;
 	color: white;
 }
 

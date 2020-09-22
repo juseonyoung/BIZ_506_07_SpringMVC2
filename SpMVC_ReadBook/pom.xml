@@ -99,6 +99,13 @@
 			<version>2.11.2</version>
 		</dependency>
 
+		<!-- RestTemplate을 사용하여 XML 결과를 받기위한 보조도구 -->
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.3</version>
+		</dependency>
 
 
 		<!-- AspectJ -->
@@ -128,7 +135,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
-			
+
 		</dependency>
 
 
