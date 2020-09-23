@@ -28,7 +28,7 @@ public class BooksController {
 		
 		List<BookVO> bookList = bookDao.selectAll();
 		model.addAttribute("BOOKS",bookList);
-		return "books/list";
+		return "books/book-list";
 	}
 	
 	@RequestMapping(value="/input",method=RequestMethod.GET)
@@ -37,7 +37,7 @@ public class BooksController {
 		// 컨트롤러의 mapping method의 return type이 String일 때 
 		// null 값을 return 하면 method 를 호출할 때 사용했던 mapping URL.jsp 형식의 return문이 자동으로
 		// 생성된다. 
-		return "books/write";
+		return "books/book-write";
 	}
 }
 

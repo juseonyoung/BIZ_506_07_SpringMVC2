@@ -45,8 +45,7 @@ nav#search-nav form input {
 
 section#search-list {
 	display: flex;
-	height: 100%;
-	flex-flow: row wrap;
+	flex-flow: column nowrap;
 	justify-content: center;
 }
 
@@ -59,8 +58,14 @@ section#search-list div {
 	margin: 5px;
 }
 
+section#search-list div:hover {
+	
+	background-color: pink;
+}
+
+
 section#search-list div p b {
-	color: red;
+	color: orange;
 }
 
 img {
@@ -71,19 +76,10 @@ img {
 
 </head>
 <body>
-	<nav id="search-nav">
-		<form method="POST">
-			<select name="category">
-				<option value="BOOK">도서정보</option>
-				<option value="NEWS">뉴스</option>
-				<option value="MOVIE">영화정보</option>
-			</select> <input name="search_text" placeholder="검색어를 입력한 후 Enter..">
-		</form>
-	</nav>
-
+	
 	<section id="search-list">
 		<c:forEach items="${NAVERS}" var="naver">
-			<div>
+			<div data-isbn="${naver.isbn }" class ="book-select">
 				<h3>${naver.title}</h3>
 				<a href="${naver.link }" target=_new> 
 				<c:if test="${naver.image == 'noImage' }">
@@ -94,6 +90,8 @@ img {
 					</c:if>
 				</a>
 				<p>${naver.description }</p>
+				<p>ISBN : ${naver.isbn}</p>
+				
 			</div>
 		</c:forEach>
 	</section>
