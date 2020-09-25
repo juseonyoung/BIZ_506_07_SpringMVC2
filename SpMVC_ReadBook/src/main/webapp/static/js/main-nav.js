@@ -15,10 +15,25 @@ $(function () {
     console.log(headerHeight, windowTop);
   });
 
+  $("li#menu-home").click(function () {});
+  $("li#menu-home").click(function () {});
+  $("li#menu-home").click(function () {});
+  $("li#menu-home").click(function () {});
+  //이렇게 일일이 하면 번거로움
+
+  // nav 의 li tag 클릭했을 때
   $("#main-nav li").click(function () {
     let menu_text = $(this).text();
+    let menu_id = $(this).attr("id"); //아이디 값 추출해서
+
     if (menu_text === "도서정보") {
       document.location.href = `${rootPath}/books`;
+    } else if (menu_id === "menu-home") {
+      document.location.href = `${rootPath}/`;
+    } else if (menu_id === "menu-read-book") {
+      document.location.href = `${rootPath}/read/`;
+    } else if (menu_id === "menu-join") {
+      document.location.href = `${rootPath}/member/join`;
     }
   });
 });

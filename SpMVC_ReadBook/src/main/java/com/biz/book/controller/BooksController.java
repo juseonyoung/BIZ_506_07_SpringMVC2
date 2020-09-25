@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,8 @@ public class BooksController {
 	// localhost:8080/book/books/ 슬래스 넣을때나 넣지 않을때나 같은 값 나오도록
 
 	// @ResponseBody //객체를 그대로 json형태로 내려보내라
+	
+	@Transactional
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET) // 문자열배열
 	public String list(Model model) {
 
@@ -39,7 +42,7 @@ public class BooksController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/input", method = RequestMethod.GET)
+	@RequestMapping(value = "/input", method = RequestMethod.GET) //get방식은 메뉴클릭했을 때 접근하는 방식,post는 input box에 입력하고 전송눌렀을때 submit되는방식
 	public String input(Model model) {
 
 		LocalDate localDate = LocalDate.now();

@@ -9,34 +9,72 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+	<!-- PBEenctrypt 클래스에서 사용할 알고리즘과 saltPassword를 설정하는 도우미 클래스 saltpassword를 
+		설정하기 위해서 반드시 property에 passwordEnvName을 사용하자 이 속성을 사용하면 server의 환경변수에서 값을 
+		가져올 수 있다. -->
+	<bean id="envConfig"
+		class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+		<property name="algorithm" value="PBEWithMD5AndDES"></property>
+		<property name="passwordEnvName" value="BIZ.NET"></property>
+
+	</bean>
+
+	<!--암호문을 복화 하는 용도로 사용할 클래스 -->
+	<bean id="encConvert" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor"><!-- 이걸 이용해 복호화 -->
+		<property name="config" ref="envConfig"></property>
+	</bean>
+
+	<!-- *.properties 이 파일을 읽어서 ENC(***)로 되어있는 문자열을 추출하여 PBE*Encryptor에게 보내서 암호문을 복호화한 후
+		필요한 곳에 주입해주는 역할 이게 정확해야 함!!!!!!!!!!!!! -->
+	<bean class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="encConvert"></constructor-arg>
+		<property name="fileEncoding" value="UTF-8"></property>
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/spring/db.connect.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
 	<!-- dataSource -->
 	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="user1" />
-		<property name="password" value="user1" />
+		<property name="username" value="${oracle.username}" />
+		<property name="password" value="${oracle.password}" />
 
 	</bean>
 
 	<!-- sqlSessionFactory -->
-	<bean id="sqlFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="ds"/>
-		<property name="mapperLocations" value="/WEB-INF/spring/mybatis/mapper/*-mapper.xml"/> <!-- 아직 mapper없더라도 오류가 나지 않는다 -->
-		<property name="typeAliasesPackage" value="com.biz.book.model"/>
-		
+	<bean id="sqlFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+		<property name="mapperLocations"
+			value="/WEB-INF/spring/mybatis/mapper/*-mapper.xml" /> <!-- 아직 mapper없더라도 오류가 나지 않는다 -->
+		<property name="typeAliasesPackage"
+			value="com.biz.book.model" />
+
 	</bean>
-	
+
 	<!-- sqlSessionTemplate -->
-	
-	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlFactory" index="0"/>
+
+	<!-- <bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlFactory" index="0" />
+	</bean> -->
+
+	<!-- 아이디를 정하는데 규칙이 있다 class뒤에 두 단어 복붙해서 앞에는 소문자로 -->
+	<tx:annotation-driven/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name ="dataSource" ref="ds"></property>
 	</bean>
-	
-	<mybatis-spring:scan base-package="com.biz.book.mapper"/>
-	
-	
-	
+
+	<mybatis-spring:scan
+		base-package="com.biz.book.mapper" />
+
+
+
 
 </beans>
