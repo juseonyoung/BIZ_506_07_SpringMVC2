@@ -60,6 +60,13 @@
 		
 		}
 		
+		section#read-book-body {
+			width:60%;
+			border:1px solid green;
+			margin: 5px auto;
+			
+		}
+		
 	
 	</style>
 	
@@ -89,11 +96,28 @@
         
          <tr class="buy">
        		 <th colspan="2">
-       		 <p>구입일 : ${BOOKVO.buydate}</p>
-       		 <p>구입가격 : ${BOOKVO.buyprice}</p>
-       		 <p>구입처 : ${BOOKVO.buystore}</p>
+       		 <p>구입일 : ${BOOKVO.buydate}/
+       		 구입가격 : ${BOOKVO.buyprice}/
+       		 구입처 : ${BOOKVO.buystore}</p>
        		 </th>
        	</tr>       		       
     </table>
+    <section id="read-book-body">
+    	<%@ include file="/WEB-INF/views/read-book/read-book-write.jsp" %>
+    </section>
+    
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

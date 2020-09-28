@@ -3,12 +3,14 @@ package com.biz.book.service.auth;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.biz.book.mapper.AuthorityDao;
 import com.biz.book.mapper.UserDao;
 import com.biz.book.model.UserDetailsVO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * spring security 프로젝트에서 사용자 인가와 권한을 관리하는 클래스!
@@ -17,9 +19,12 @@ import lombok.RequiredArgsConstructor;
  * 커스터마이징
  * 패키지형 솔루션 가지고 있는 it회사에서 어떤회사에 솔루션을 판매하면서 회사의 실정,
  * 업무환경, 여러 여건들을 요구분석하여 솔루션 사용하는 회사에 최적하 하는 것
+ * 
+ * context(service패키지)에서 한번, servlet(auth패키지)에서 한번 스캔 두번됨
  */
-
+@Slf4j
 @RequiredArgsConstructor
+@Service("userDetailServiceV1")
 public class UserDetailServiceImplV1 implements UserDetailsService{
 	
 	/*
@@ -49,9 +54,21 @@ public class UserDetailServiceImplV1 implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		UserDetailsVO userDetail =userDao.findById(username);
+		
+		
+		// 테스트를 위한 임시 사용자 정보 생성
+		/*userDetail = UserDetailsVO.builder().username(username).password("12341234").Enabled(true).build();*/
+		
+		
 		if(userDetail == null) { //사용자 정보가 없으면
+			
+			// 강제로 일부러 usernamenotfoundexception을 발생시킨다
 			throw new UsernameNotFoundException(username + "정보를 찾을 수 없음");
 		}
+		log.debug("USER:" +userDetail.toString());
+		
+		
+		userDetail.setEnabled(true);
 		
 		return userDetail;
 	}

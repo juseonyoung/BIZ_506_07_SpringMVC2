@@ -6,12 +6,20 @@ import org.apache.ibatis.type.Alias;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@Builder
 @Alias("UserDetail")
 @Setter
 @Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDetailsVO implements UserDetails {
 
 	//VO 쓰기위한 필드변수 선언
@@ -30,18 +38,19 @@ public class UserDetailsVO implements UserDetails {
 	private String username;
 	private String password;
 	
-	private boolean isEnabled;
-	private boolean isAccountNonExpired;
-	private boolean isAccountNonLocked;
-	private boolean isCredentialsNonExpired;
+	private boolean Enabled;
+	private boolean AccountNonExpired;
+	private boolean AccountNonLocked;
+	private boolean CredentialsNonExpired;
 	
 	// List<GrantedAuthority> collection은 list의 부모 
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	// 프로젝트에서 필요한 별도의 필드변수를 선언
-	private String email;
-	private String phone;
-	private String address;
+	private String m_name;
+	private String m_tel;
+	private String m_email;
+	private String m_address;
 	
 	
 	
