@@ -19,6 +19,7 @@
 					$("#p_code").val(result)
 				},
 			});
+			
 		}
 		$("#p_code_gen").click(getPCode);
 

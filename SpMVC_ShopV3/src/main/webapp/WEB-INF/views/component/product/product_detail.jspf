@@ -21,6 +21,8 @@ article {
 	border-bottom: 2px solid #ccc;
 }
 
+
+
 #pro_info h3 {
 	background-color: #dddddd;
 	color: blue;

@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-image: url("../images/unnamed.jpg");
+	padding: 4rem;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+table#io-table {
+	align-items: center;
+	padding: 10px;
+	margin: 20px auto;
+	width: 80%;
+	border-top: 1px solid black;
+	border-collapse: collapse;
+}
+
+table#io-table th, table#io-table tr td {
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+
+table#io-table th {
+	padding: 14px;
+	background-color: gold;
+}
+
+table#io-table tr td {
+	padding: 7px;
+}
+
+table#io-table tr td:nth-child(1) {
+	width: 8px;
+}
+
+h3 {
+	text-align: center;
+	margin: 40px auto;
+	font-style: italic;
+}
+
+footer {
+	 background-color: tomato;
+    text-align: center;
+    padding: 8px;
+    
+}

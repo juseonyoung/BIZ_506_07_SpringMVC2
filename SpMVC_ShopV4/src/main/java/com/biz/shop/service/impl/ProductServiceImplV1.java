@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service(value="proServiceV1")
+
 public class ProductServiceImplV1 implements ProductService{
 	
 	@Autowired

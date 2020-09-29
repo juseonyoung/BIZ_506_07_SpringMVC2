@@ -21,6 +21,7 @@ th, td {
  An + b 형식의 연산식을 사용한다
  th와 td값에 4번째 위치 이후에 동일한 특성(style)을 지정하라 */
 th:nth-child(n+4), 
+
 td:nth-child(n+4) {
 
 	text-align: right;

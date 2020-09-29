@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.iolist.mapper.ProductDao">
+
+	<select id="selectAll" resultType="ProductVO">
+
+		SELECT * FROM tbl_iolist
+
+	</select>
+
+	<insert id="insert">
+		INSERT INTO tbl_iolist (
+		io_seq,
+		io_date,
+		io_time,
+		io_input,
+		io_pname,
+		io_price,
+		io_quan,
+		io_total
+		) VALUES (
+		#{io_seq},
+		#{io_date},
+		#{io_time},
+		#{io_input},
+		#{io_pname},
+		#{io_price},
+		#{io_quan},
+		#{io_total}
+		)
+	</insert>
+
+	<!-- java에서 vo에 널값 담았을 때 DB의 테이블에 vo의 값을 사용하여 insert, update 수행하려고 하면 java 
+		null 값과 DB의 널값이 개념적으로 차이가 있어서 오류가 발생을 한다. 부적절한 열 유형 1111 #{p_name,jdbcType=VARCHAR 
+		}설정 이 속성은 자바의 vo에 담겨있는 null값을 DBMS 유형에 맞는 널값으로 변환하여 insert, update를 수행하라 
+		라는 의미 -->
+
+	<update id="update">
+
+
+	</update>
+	<delete id="delete"></delete>
+
+</mapper> 
