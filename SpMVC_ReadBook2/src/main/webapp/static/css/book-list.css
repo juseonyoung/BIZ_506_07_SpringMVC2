@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+table#book-list {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 90%;
+  border: 1px solid rgb(96, 120, 185);
+  margin: 30px auto;
+}
+
+table#book-list th,
+table#book-list td {
+  border-bottom: 1px solid skyblue;
+  padding: 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table#book-list td {
+  cursor: pointer;
+}
+
+table#book-list tr:nth-child(even) {
+  background-color: #d6bc4a;
+  color: rgb(0, 0, 0);
+}
+
+table#book-list tr:nth-child(odd) {
+  background-color: #ffffff;
+  color: navy;
+}
+/*n+2 공식으로 계산되는 결과에 따라*/
+
+table#book-list tr:nth-child(1) {
+  background-color: rgb(92, 205, 167);
+  color: black;
+}
+
+table#book-list tr:nth-child(n + 2):hover {
+  background-color: gray;
+}
+
+div#book-link-box {
+  width: 90%;
+  margin: 10px auto;
+  text-align: right;
+}
+
+div#book-link-box a {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: cornflowerblue;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+}
+div#book-link-box a:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+}
