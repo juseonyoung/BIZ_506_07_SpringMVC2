@@ -1,5 +1,11 @@
 package com.biz.book.service.auth;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.biz.book.mapper.AuthorityDao;
 import com.biz.book.mapper.UserDao;
+import com.biz.book.model.AuthorityVO;
 import com.biz.book.model.UserDetailsVO;
 
 import lombok.RequiredArgsConstructor;
@@ -76,7 +83,33 @@ public class UserDetailServiceImplV1 implements UserDetailsService{
 		//userDetail.setEnabled(true); //이걸 막으면 두번째 사용자는 enabled가 0으로 되어 false , 사용 불가가됨
 		// 인증절차 통과했을 때 true로 만들어서 로그인 할 수있도록 해라 
 		
+		if(this.getAuthorities(username).size()==0) { // 권한이 없으면?
+			throw new UsernameNotFoundException(String.format("[ %s ]는 아무런 권한이 없습니다", username));
+		}
+		
+		// DB로부터 가져와서 GrantedAuthorrity로 변환한 role 정보를 list userdetails에 저장해라 
+		userDetail.setAuthorities(this.getAuthorities(username));
 		return userDetail;
+	}
+	
+	// tbl_authority로부터 role 정보를 가져와서 list로 생성
+	private Collection<GrantedAuthority> getAuthorities(String username){
+		
+		
+		// tbl_authority로부터 role 정보를 selec
+		List<AuthorityVO> authList = authDao.findByUserName(username);
+		
+		// 변환
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for(AuthorityVO vo : authList) {
+			
+			// 문자열로 된 role 정보를 grantedAuthority 타입으로 변환하여
+			// 리스트로 생성하기
+			// simplegrantedauthority 클래스를 사용하여 변환
+			authorities.add(new SimpleGrantedAuthority(vo.getAuthority()));
+		}
+		
+		return authorities;
 	}
 
 }

@@ -27,6 +27,7 @@
 			 			
  	</select>
  	
+ 	
  	<insert id="insert" parameterType="UserDetail">
  		INSERT INTO tbl_member(
  		M_USERID,

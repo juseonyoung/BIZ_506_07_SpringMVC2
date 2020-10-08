@@ -2,8 +2,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
-<link href="${rootPath}/static/css/book-write.css?ver=2020-09-24-051888" rel="stylesheet">
 
+<link href="${rootPath}/static/css/book-write.css?ver=2020-09-24-05188" rel="stylesheet">
 
 <script>
 
@@ -17,6 +17,8 @@
 	
 </script>
 <script src="${rootPath}/static/js/book-write.js?ver=2020-09-24-077644"></script>
+
+
 
 	<h3>도서 정보등록</h3>
 	<form:form id="books" modelAttribute="bookVO">

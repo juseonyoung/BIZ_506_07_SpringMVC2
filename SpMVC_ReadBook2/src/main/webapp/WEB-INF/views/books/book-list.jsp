@@ -9,7 +9,21 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>도서관</title>
 <link href="${rootPath }/static/css/book-list.css?ver=2020-09-24-02" rel="stylesheet">
-<script src="${rootPath }/static/js/book-list.js?ver=2020-09-24" ></script>
+<script>
+
+$(function () {
+	  $("tr.book-item").click(function () {
+	    let seq = $(this).data("seq");
+
+	    // query String 방식
+	    //document.location.href = `${rootPath}/books/detail?seq=${seq}`;
+
+	    // path variable 방식(최근)
+	    document.location.href = "${rootPath}/books/detail/" +seq;
+	  });
+	});
+
+</script>
 </head>
 <body>
 	
@@ -35,7 +49,7 @@
 			<c:otherwise>
 			
 				<c:forEach items="${BOOKS}" var="book" varStatus="i">
-					<tr>
+					<tr class="book-item" data-seq ="${book.seq }">
 						<td>${i.count}</td>
 						<td class="book-title"
 						 data-seq="${book.seq }">${book.title}</td>

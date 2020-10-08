@@ -13,6 +13,16 @@
 		<!-- authprovider에서 userdetailservice를 사용해야 하기 때문에 여기에 userdetailservice 클래스가 있는 패키지를
 		스캔하도록 설정해 주어야 한다.  -->
 		<context:component-scan base-package="com.biz.book.service.auth"/>
+		
+		<!-- 권한 검사 할때 prefix 설정하는 클래스 bean -->
+		<!-- 이 클래스를 bean으로 설정하면서 construct-arg value="" prefix 제거하는 효과 -->
+		<!-- 시큐리티 버전마다 조금 차이가 있어서 설정값이 적용이 안되는 경우가 있다 -->
+		<!-- 보통은 설정하지 않고 기본값으로 접두어를 붙여 사용한다 : ROLE_ADMIN -->
+		
+		<!--org.springframework.security.config.core.GrantedAuthorityDefaults-->
+		<bean class="org.springframework.security.config.core.GrantedAuthorityDefaults">
+			<constructor-arg value="ROLE_"></constructor-arg>
+		</bean>
 
 	<!-- spring security에서 사용할 AuthenticationProvider를 구현한 클래스를  bean 으로 등록 -->
 	<bean id="customAuthProvider" class="com.biz.book.auth.AuthorProviderImpl"/>
@@ -47,15 +57,15 @@
 		<security:form-login username-parameter="username" password-parameter="password"/>
 		<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true"/>
 		
-		<security:intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/> <!-- 패턴에 따라 권한을 부여 
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> <!-- 패턴에 따라 권한을 부여 
 		admin으로 시작하면 관리자 권한으로 접근하는 것을 알게 됨 
 		로그인할 사용자의 권한이 ADMIN일 때만!! 접근하게 해라 -->
-		<security:intercept-url pattern="/member/mypage" access="hasAnyRole('ADMIN','USER')"/>
-		<security:intercept-url pattern="/member/password" access="hasAnyRole('ADMIN','USER')"/> <!-- 자신과 관리자가 비번 변경권한 있음 -->
+		<security:intercept-url pattern="/member/mypage" access="hasAnyRole('ROLE_ADMIN','USER')"/>
+		<security:intercept-url pattern="/member/password" access="hasAnyRole('ROLE_ADMIN','USER')"/> <!-- 자신과 관리자가 비번 변경권한 있음 -->
 		<security:intercept-url pattern="/member/**" access="permitAll()"/> <!-- mypage password 패턴이 아닌경우 누구나 접근가능 
 		이걸 맨 위에 올리면 위에 두 조건이 무시됨 가장 복잡하고 긴 조긴이 맨 위에 와야한다 -->
 		
-		<security:intercept-url pattern="/books/**" access="hasAnyRole('ADMIN','USER')"/>
+		<security:intercept-url pattern="/books/**" access="hasAnyRole('ROLE_ADMIN','USER')"/>
 		<security:intercept-url pattern="/**" access="permitAll()"/> <!-- 위에 설정한것 빼고 나머지! 는 허용한다 -->
 	</security:http>
 	

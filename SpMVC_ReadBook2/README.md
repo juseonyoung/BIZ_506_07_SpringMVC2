@@ -25,5 +25,22 @@
 * 도서명을 입력하고 네이버 검색 버튼을 클릭하면
   도서명을 ajax를 사용하여 검색하고 결과를 Modal 창에 띄운다. 
  
+## write 입력폼 구현
+*sessionattributes(), @modelattribute(), spring form taglib을 연동한 write(입력폼)구현
+컨트롤러 클래스에 @sessionattributes("bookVO")를 설정하고 각 method에 매개변수로 
+@modelattribute("bookVO") BookVO bookVO를 선언하고 
+컨트롤러 클래스의 멤버영역에 @modelattribute("bookVO") public BookVO new BookVO() method 선언하고
+spring form taglib를 이용한 write form <form:form modelattribute="bookVO">를 선언하여
+프로젝트를 구현하면 
 
+id, seq 등 실제 사용자에게 입력받거나 보여줄 필요가 없는 VO의 변수들을
+<input type="hidden">으로 설정한 후 컨트롤러로 전송하던 HTML5 표준방식을 사용하지 않아도
+VO에 설정된 변수들을 컨트롤러와 JSP가 서로 공유하여 사용할 수 있다. session쓰는 가장 큰 목적!
+@sessionAttributes()에 담긴 VO 객체는 서버의 메모리에 보관되며
+HTTP 프로토콜의 비연결지향(상태가 없는 통신) 상태에서도 데이터를 자유롭게 공유하여 구현할 수 있는 장점이 있다.
+
+그럼에도 경우에 따라 입력 폼을 사용자에게 보여주엇을 때 마지막에 입력했던 데이터들이 form에 나타나서
+불편한 경우가 있다.
+이러한 현상을 방지하기 위해서 form에 입력되었던 데이터 사용이 끝나면(insert, update 완료 후)
+sessionstatus.setComplete() method를 호출하여 데이터를 clear 시켜주어야 한다.  
 

@@ -23,7 +23,6 @@
 	// *.js 파일에서는 백팃 사용하여 해당 변수 사용할 수 있다.
 	var csrf_header = "${_csrf.headerName}"
 	var csrf_token = "${_csrf.token}"
-	
 </script>
 <script src="${rootPath}/static/js/main-nav.js?ver=2020-09-25641"></script>
 
@@ -35,27 +34,27 @@
 	</header>
 
 	<nav id="main-nav">
-      <ul>
-        <li id="menu-home">Read Book</li>
-        <li id="menu-books">도서정보</li>
-        <li id="menu-read-book">독서록</li>
-        <li>네이버검색</li>
-        
-        <sec:authorize access="isAnonymous()">
-        <li id="menu-join">회원가입</li>
-        <li id="menu-login">로그인</li>
-        </sec:authorize>
-        <sec:authorize access="isAuthenticated()">
-        <li id="menu-mypage">마이페이지</li>
-        <li id="menu-logout">로그아웃</li>
-        </sec:authorize>
-        
-        <sec:authorize access="hasRole('ADMIN')">
-           <li>관리자</li>
-        </sec:authorize>
-        
-      </ul>
-    </nav>
+		<ul>
+			<li id="menu-home">Read Book</li>
+			<li id="menu-books">도서정보</li>
+			<li id="menu-read-book">독서록</li>
+			<li>네이버검색</li>
+
+			<sec:authorize access="isAnonymous()">
+				<li id="menu-join">회원가입</li>
+				<li id="menu-login">로그인</li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<li id="menu-mypage">마이페이지</li>
+				<li id="menu-logout">로그아웃</li>
+			</sec:authorize>
+
+			<sec:authorize access="hasRole('ADMIN')">
+				<li>관리자</li>
+			</sec:authorize>
+
+		</ul>
+	</nav>
 	<section id="main-section">
 		<c:choose>
 			<c:when test="${BODY =='BOOK-LIST'}">
@@ -67,27 +66,34 @@
 			<c:when test="${BODY =='BOOK-DETAIL'}">
 				<%@ include file="/WEB-INF/views/books/book-detail.jsp"%>
 			</c:when>
-			
+
 			<c:when test="${BODY =='MEMBER-JOIN' }">
 				<%@ include file="/WEB-INF/views/member/member-write.jsp"%>
 			</c:when>
-			
+
 			<c:when test="${BODY =='MEMBER-JOIN-NEXT' }">
 				<%@ include file="/WEB-INF/views/member/member-write2.jsp"%>
 			</c:when>
-			
+
 			<c:when test="${BODY =='MEMBER-UPDATE' }">
 				<%@ include file="/WEB-INF/views/member/member-update.jsp"%>
 			</c:when>
-			
+
 			<c:when test="${BODY =='MEMBER-UPDATE-NEXT' }">
 				<%@ include file="/WEB-INF/views/member/member-update2.jsp"%>
 			</c:when>
-			
-			
-		
+
+
 			<c:otherwise>
 				<%@ include file="/WEB-INF/views/main-body.jsp"%>
+				<style>
+div#select_box {
+	width: 50%;
+	margin: 10px auto;
+}
+</style>
+				
+
 			</c:otherwise>
 		</c:choose>
 
