@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.biz.book.mapper.BookDao;
+import com.biz.book.mapper.ReadBookDao;
 import com.biz.book.model.BookVO;
 import com.biz.book.model.ReadBookVO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -33,14 +35,16 @@ import lombok.extern.slf4j.Slf4j;
 // 이름을 bookVO라고 지정. method안중요 x 리턴타입을 BookVO로 하고 modelattribute라는 어노테이션 지정.
 // 이 메서드가 VO를 만드는 command method / bookVO라는 변수에 값을 채워넣음
 
+@RequiredArgsConstructor
 @Transactional
 @Slf4j
 @Controller
 @RequestMapping(value = "/books")
 public class BooksController {
 
-	@Autowired
-	private BookDao bookDao;
+	
+	private final BookDao bookDao;
+	private final ReadBookDao rbookDao;
 	
 	@ModelAttribute("bookVO")
 	public BookVO newBookVO() {
@@ -137,7 +141,10 @@ public class BooksController {
 	            .r_stime(lTime)
 	            .build();
 	      
+	      List<ReadBookVO> readList = rbookDao.findBySeq(seq);
 	      // 09-28 추가
+	      
+	      model.addAttribute("READ_BOOK",readList); //readbook-write에 있는 items에 readList 담아 보낸다 
 	      model.addAttribute("readBookVO",readBookVO);
 	      
 	      
