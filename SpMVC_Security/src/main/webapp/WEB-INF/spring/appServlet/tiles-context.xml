@@ -4,21 +4,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-	
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/views/tiles-layout.xml</value>
 			</list>
 		</property>
 	</bean>
-	<bean id="tilesView" class="org.springframework.web.servlet.view.tiles3.TilesView">
-	</bean>
-	
-	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewClass" ref="tilesView"/>
-		<property name="order"  value="1"/>
-		
+
+
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+
 	</bean>
 </beans>
 
