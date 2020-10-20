@@ -1,6 +1,6 @@
 package com.biz.bbs.model;
 
-import org.springframework.stereotype.Service;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -13,7 +13,9 @@ public class BBsSQL {
 
 	public String bbs_insert() {
 		
-		SQL sql = new SQL();
+		SQL sql = new SQL(); //페이지네이션 구현할 때 
+		
+		
 		sql.INSERT_INTO("tbl_bbs");
 		sql.INTO_COLUMNS("b_seq").INTO_VALUES("seq_bbs.NEXTVAL");
 		sql.INTO_COLUMNS("b_date").INTO_VALUES("#{b_date}");
