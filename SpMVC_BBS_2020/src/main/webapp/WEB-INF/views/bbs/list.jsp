@@ -7,12 +7,33 @@
 				function() {
 					document.location.href = "${rootPath}/bbs/write"
 				})
+				
+		/*
+		태그와 태그들이 서로 감싼 관계로 레이아웃이 만들어져 있을 때 태그들에 클릭event 핸들링이 설정되어 있으면
+		어떤 특정 태그를 클릭했을 때 원하지 않는 event가 발생하는 경우가 있다.
+		이러한 현상을 이벤트 버블링 이라고 한다.
+		태그 박스의 가장 중간부분에 있는 태그를 클릭하면 안쪽부터 바깥쪽으로 계속해서 이벤트가 전해지는 현상
+		이러한 현상을 막기위해서 event.stopPropagation() 등의 함수를 사용하여 버블링을 막아준다.
+		
+		이 버블링을 역으로 효과적으로 이용할 수 있는데
+		td를 감싸고 있는 테이블에 click event를 설정하고 td에서는 click event를 제거해주면
+		결국 td를 click했을 때 해야할 일을 table의 click event에서 통합으로 관리할 수 있다.
+		복잡한 event 코드같으면 td에서 처리하는 것이 효과적일 수도 있지만 짧은 코드를 반복하지 않고 처리하기 위해서
+		table에서 처리를 한다. 
+		이러한 기법을 이벤트 위임이라고 한다. 
+		
+		*/
 
 		document.querySelector("table").addEventListener("click",
 				function(event) {
 					let tag_name = event.target.tagName;
 					if(tag_name ==="TD"){
-						let seq = event.target.dataset.seq
+						// 제목이 저장된 TD tag에서 seq값 추출
+						//let seq = event.target.dataset.seq
+						// td tag가 클릭되었으면 현재 클릭된 td tag와 가장 인접한 tr 을 참조하겠다
+						// 클릭된 TD를 기준으로 TR tag에서 seq값 추출
+						
+						let seq = event.target.closest("TR").dataset.seq
 						if(seq){
 							//alert(seq)
 							document.location.href="${rootPath}/bbs/detail/"+seq
@@ -33,11 +54,11 @@
 </script>
 <style>
  
- 	td.bbs-subject {
+ 	td.bbs-tr {
  		cursor: pointer;
  	}
  	
- 	td.bbs-subject:hover {
+ 	td.bbs-tr:hover {
  		background-color: #ccc;
  	}
  	

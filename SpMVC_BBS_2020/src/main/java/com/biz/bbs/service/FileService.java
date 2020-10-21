@@ -6,6 +6,8 @@ public interface FileService {
 
 	
 	public String fileUp(MultipartFile file);
+
+	public boolean fileDelete(String b_file);
 	
 	
 }
