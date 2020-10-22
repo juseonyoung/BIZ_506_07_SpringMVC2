@@ -93,10 +93,15 @@ section#bbs-button-box button:nth-child(3) {
 				if(e.target.className == "delete"){
 					if(!confirm("정말 삭제할까요?")){
 						
-						let data = {seq:"${BBSVO.b_seq}"}
+						let data = {seq:"${BBSVO.b_seq}",
+									subject : "${BBSVO.b_subject}"		
+						
+						}
 						fetch("${rootPath}/api/bbs", 
+								
 		
-								{method : "DELETE", 
+								{
+								method : "PUT", 
 								headers : {
 								
 									"Content-Type": "application/json"
@@ -105,7 +110,7 @@ section#bbs-button-box button:nth-child(3) {
 							}
 						)
 						.then(function(result){
-							alert("성공")
+							alert(result)
 						})
 						.catch(function(error){
 							alert("실패")
