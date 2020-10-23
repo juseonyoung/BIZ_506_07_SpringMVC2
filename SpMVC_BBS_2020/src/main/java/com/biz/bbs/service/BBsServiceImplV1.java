@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.biz.bbs.mapper.BBsDao;
+import com.biz.bbs.mapper.ImageDao;
 import com.biz.bbs.model.BBsVO;
+import com.biz.bbs.model.ImageVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +23,10 @@ public class BBsServiceImplV1 implements BBsService{
 	protected  BBsDao bbsDao;
 	
 	@Autowired
-	@Qualifier("fileServiceV4")
+	protected ImageDao imageDao;
+	
+	@Autowired
+	@Qualifier("fileServiceV5")
 	protected  FileService fileService;
 	
 	
@@ -46,7 +52,12 @@ public class BBsServiceImplV1 implements BBsService{
 	@Override
 	public BBsVO findBySeq(long long_seq) {
 	
-		return bbsDao.findBySeq(long_seq);
+		BBsVO bbsVO = bbsDao.findBySeq(long_seq);
+		List<ImageVO> images = imageDao.findBySeq(long_seq);
+		
+		bbsVO.setImages(images);
+		
+		return bbsVO;
 	}
 
 	@Override
@@ -72,6 +83,33 @@ public class BBsServiceImplV1 implements BBsService{
 	public void insert(BBsVO bbsVO) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<String> insert(BBsVO bbsVO, MultipartHttpServletRequest files) {
+		// TODO Auto-generated method stub
+		
+		// 업로드된 멀티파일 정보에서 개별 파일들을 리스트에 추출
+		// file.getFiles(이름) : "이름"은 input tag의 네임값을 지정해 준다.
+		List<MultipartFile> fileList = files.getFiles("files");
+		
+		for(MultipartFile f : fileList) {
+			log.debug("업로드된 파일 {}", f.getOriginalFilename());
+		}
+		
+		// 1. 파일업로드 수행하고 파일이름 리스트를 확보햇다
+		List<ImageVO> fileNames = fileService.fileUp(files);
+		
+		// 2. bbsVO 를 insert 수행
+		bbsDao.insert(bbsVO);
+		long b_seq = bbsVO.getB_seq();
+		log.debug("BBS SEQ {}", b_seq);
+		
+		for(ImageVO vo : fileNames) {
+			imageDao.insert(vo, b_seq);
+		}
+		
+		return null;
 	}
 	
 	
