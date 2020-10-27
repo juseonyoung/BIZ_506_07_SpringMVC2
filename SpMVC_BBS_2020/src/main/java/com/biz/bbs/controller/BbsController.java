@@ -82,7 +82,7 @@ public class BbsController {
 	 * 2. 각각의 파일들을 모두 업로드 수행하고 
 	 * 3. 업로드된 파일 이름을 DB에 저장하는 처리를 해야한다.
 	 * 
-	 * 
+	 *
 	 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String write(BBsVO bbsVO, @RequestParam(name="file", required =false) MultipartFile file,
