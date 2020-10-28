@@ -11,5 +11,16 @@
 </head>
 <body>
 	<h3>나의 홈페이지 방문을 환영합니다</h3>
+	
+	<p>보낸 이메일 :${to_email }</p>
+	<p>받는 이메일 :${from_email }</p>
+	<p>보낸 날짜 :${EMS.s_date }</p>
+	<p>보낸 시각 :${EMS.s_time }</p>
+	<p>제목 :${s_subject }</p>
+	<p>내용 :${EMS.s_content }</p>
+	
+
+	
 </body>
+	<a href="${rootPath }/">처음으로</a>
 </html>
