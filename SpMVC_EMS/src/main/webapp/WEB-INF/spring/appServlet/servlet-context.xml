@@ -13,11 +13,11 @@
 	<annotation-driven />
 
 	<beans:bean id="winPath" class="java.lang.String">
-		<beans:constructor-arg value="c:/bizwork/workspace/upload"></beans:constructor-arg>
+		<beans:constructor-arg value="c:/bizwork/workspace/upload/"></beans:constructor-arg>
 	</beans:bean>
 	
 		<beans:bean id="linuxPath" class="java.lang.String">
-		<beans:constructor-arg value="Users/callor/Documents/workspace/upload"></beans:constructor-arg>
+		<beans:constructor-arg value="Users/callor/Documents/workspace/upload/"></beans:constructor-arg>
 	</beans:bean>
 	
 

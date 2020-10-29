@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.biz.ems.mapper.EmsDao;
 import com.biz.ems.model.EmsVO;
-
 
 @Service("emsServiceV1")
 public class EmsServiceImpl implements EmsService{
@@ -16,46 +14,48 @@ public class EmsServiceImpl implements EmsService{
 	@Autowired
 	private EmsDao emsDao;
 	
+	
 	@Autowired
 	private NaverMailSendService naverMail;
 	
+	
 	@Override
 	public List<EmsVO> selectAll() {
-
-		List<EmsVO> emsList = emsDao.selectAll();
 		
+		List<EmsVO> emsList = emsDao.selectAll();
 		return emsList;
 	}
 
 	@Override
 	public EmsVO findById(Long id) {
-
+		// TODO Auto-generated method stub
+		
 		EmsVO emsVO = emsDao.findById(id);
 		return emsVO;
 	}
 
 	@Override
 	public int insert(EmsVO emsVO) {
-
-		naverMail.sendMail(emsVO);
-		int ret = emsDao.insert(emsVO);
 		
+		naverMail.sendMail(emsVO);
+		
+		int ret = emsDao.insert(emsVO);
 		return ret;
 	}
 
 	@Override
 	public int update(EmsVO emsVO) {
-
-		return emsDao.update(emsVO);
+		// TODO Auto-generated method stub
 		
+		return emsDao.update(emsVO);
 	}
 
 	@Override
 	public int delete(Long id) {
-
+		// TODO Auto-generated method stub
+		
 		int ret = emsDao.delete(id);
 		return ret;
 	}
 
-	
 }
