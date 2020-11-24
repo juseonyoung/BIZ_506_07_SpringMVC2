@@ -23,73 +23,81 @@
 <link rel="stylesheet" href="${rootPath}/static/summernote/summernote-bs4.min.css">
 <script src="${rootPath}/static/summernote/summernote-bs4.min.js"></script>
 <script src="${rootPath}/static/summernote/lang/summernote-ko-KR.min.js"></script>
-<style>
-   *{
-   font-family: "Jua", sans-serif;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0; 
-      
-      
-   }
-   html, body{
-      width: 100%;
-      height: 100%;
-   }
-   
-   body{
-      display: flex;
-      flex-direction: column;
-   }
+   <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
 
+      header {
+       position: relative;
+  height: 400px;
+  color: white;
 
-   header{
-      background: linear-gradient(to right, gold, orange);
-      color: white;
-      padding: 3rem;
-      text-align: center;
-   }
-   nav ul {
-      list-style: none;
-      display: flex;
-      background: linear-gradient(to left, pink, #FA8258);
-      color: white;
-   }
-   
-   nav ul li{
-      display: inline-block;
-      margin: 3px 10px; /* top-bottom, left-right*/
-      padding: 6px 12px;
-      cursor: pointer;
+  background-image: url("${rootPath}/static/images/냥이.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  
+  background-attachment: fixed;
+
+  justify-content: center;
+  align-items: center;
+      }
       
-   }
-   nav ul li:hover{
-      background-color: #ddd;
-      color: black;
-   }
-   /*
-      body를 flex로 선언하고
-      content가 위치하는 box에 flex값을 1로 선언하면
-      화면에 가득차는 layout이 만들어진다.
-      html, body의 height를 100%로 선언해줘야한다.
-      overflow: auto 로 설정을 하면 내용이 가득 찼을 때 자동으로 
-      스크롤바가 생성
-   */
-   section#content{
-      flex:1;
-      overflow: auto;
-   
-   }
-   
-   
-   footer{
-      background-color: black;
-      color: white;
-      text-align: center;
-      padding: 0.3rem;
-   }
+      section#content{
+      
+      /*
+      html, body의 height: 100%로 설정하고, 
+      body를 flex-direction: column;,flex로 설정하고 
+      header, nav, content, footer 를 각각 배열하고
+      content가 있는 박스에만 flex값을 1로 설정하면 height 가 전체 가득 찬 레이아웃이 만들어진다
+      overflow 는 내용이 넘치면 자동으로 스크롤바생성*/
+      	flex:1;
+      	overflow:auto;
+      	
+      }
 
-</style>
+      nav#main-nav ul {
+        background: linear-gradient(to right, purple, orange);
+        list-style: none;
+        display: flex;
+      }
+
+      nav#main-nav li {
+        padding: 8px 16px;
+        color: white;
+        margin: 0px 5px;
+        border-bottom: 3px solid transparent;
+        cursor:pointer;
+        transition:border-color 0.3s linear;
+      }
+
+      nav#main-nav li:nth-child(3) {
+        margin-left: auto;
+      }
+
+      nav#main-nav li:hover {
+        border-bottom: 3px solid black;
+        cursor: pointer;
+      }
+
+      footer {
+        background: linear-gradient(to left, pink, black);
+        color: white;
+        text-align: center;
+        padding: 0.7rem;
+      }
+    </style>
 </head>
 <body>
 <%
